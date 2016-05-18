@@ -189,7 +189,7 @@ water, gas and so on.
 In this work, we tackle various challenges to the protection of ICSes by
 applying SDN technologies and developing innovative security applications and tools.
 In particular, we install \textit{ConVenus} between the control plane and data plane
-to enforce the congestion-free property in the network layer;
+to enforce the correct policies defined in the network layer;
 on the data plane layer, we enhance the resilience of PMU networks against cyber attacks
 with \textit{SelfHealer}[open to suggestions];
 we build a hybrid testing platform \textit{DSSnet} to support
@@ -199,14 +199,19 @@ To be more specific:
 \begin{itemize}
 % ConVenus
         \item \textbf{ConVenus}: With SDN-enabled global visibility, ConVenus
-        adopts the dynamic data-driven paradigm to preserve congestion-free 
+        1) inherits the real-time verification functionality from Veriflow\cite{Veriflow};
+        2) adopts the dynamic data-driven paradigm to preserve congestion-free 
 	property throughout the lifetime of the delay-critical part of the ICSes network.
-	When each time there is a network flow to be inserted, updated or removed, ConVenus
-	performs the following steps: (1) identifies the minimum subnetwork that is affected
-	by the incoming flow update (2) models the extracted subnetwork with a undirected graph
-	as the network topology and a set of directed path as the network flows (3) runs 
-	a fast simulation algorithm to quickly compute the throughput of every flow in the
-	network model and report congestion if it exists. By incrementally updating the model and
+	When each time there is a network flow to be inserted, updated or removed,
+        ConVenus performs the following steps:
+        \begin{enumerate}
+                \item identifies the minimum subnetwork that is affected by the incoming flow update
+                \item models the extracted subnetwork with an undirected graph as the network topology
+        and a set of directed path as the network flows
+                \item runs a fast simulation algorithm to quickly compute the throughput of every flow
+        in the network model and report congestion if it exists.
+        \end{enumerate}
+        By incrementally updating the model and
 	rejecting the updates that causes congestion, ConVenus can guarantee that at any time the network
 	is congestion-free.  
 
@@ -226,13 +231,13 @@ To be more specific:
 % DSSnet and virtual time
 \item \textbf{DSSnet}\cite{DSSnet} address the challenge that it is infeasible to create
         a physical testbed for modern ICSes given its large scope.
-        We combines a power distribution system simulator with an SDN network emulator
+        We combine a power distribution system simulator with an SDN network emulator
         so that high performance and temporal fidelity are preserved without sacrificing
         the supported scalability.
         The combination is built on the foundation of a virtual time system:
         on one hand, virtual time system tightly controls (pauses and resumes)
         the execution of the emulation system whenever synchronization between two
-        sub-system is required;
+        sub-systems required;
         on the other hand, by accurately dilating the clock of emulated network ends,
         DSSnet is able to emulate high bandwidth and low latency networks that exceeds
         resource capability available on the test machines.
