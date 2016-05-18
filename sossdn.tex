@@ -182,64 +182,75 @@ email: {\texttt{jsmith@affiliation.org}}) and Julius P.~Kumquat
 % background
 A wide variety of ICSes connected to the physical world rely on
 the underlying network to monitor and control critical physical processes.
-Compromising communication network in ICSes will cause damaging impact on
+Compromising communication network in ICSes will cause serious damage on
 the healthy operation of critical national infrastructures related to power,
 water, gas and so on.
 % one sentence summary of 3 works: ConVenus, Self-healing, DSSnet
 In this work, we tackle various challenges to the protection of ICSes by
-applying SDN technologies and developing innovative security applications and tools.
-In particular, we install \textit{ConVenus} between the control plane and data plane
+applying SDN technologies and developing
+innovative security applications and tools.
+In particular, we install \textit{ConVenus} between
+the control plane and data plane
 to enforce the correct policies defined in the network layer;
-on the data plane layer, we enhance the resilience of PMU networks against cyber attacks
-with \textit{SelfHealer}[open to suggestions];
+on the data plane layer, we enhance the resilience of PMU networks
+against cyber attacks with \textit{SelfHealer};
 we build a hybrid testing platform \textit{DSSnet} to support
 high-fidelity analysis of cyber attacks on SDN powered ICSes networks.
-To be more specific:
-
+Specifically,
 \begin{itemize}
 % ConVenus
         \item \textbf{ConVenus}: With SDN-enabled global visibility, ConVenus
-        1) inherits the real-time verification functionality from Veriflow\cite{Veriflow};
-        2) adopts the dynamic data-driven paradigm to preserve congestion-free 
-	property throughout the lifetime of the delay-critical part of the ICSes network.
-	When each time there is a network flow to be inserted, updated or removed,
-        ConVenus performs the following steps:
+        inherits the real-time verification functionality from
+        Veriflow\cite{Veriflow} and adopts the dynamic data-driven 
+        paradigm to preserve congestion-free property throughout
+        the lifetime of the delay-critical part of the ICSes network.
+	When each time there is a network flow to be inserted,
+        updated or removed, ConVenus performs the following steps:
         \begin{enumerate}
-                \item identifies the minimum subnetwork that is affected by the incoming flow update
-                \item models the extracted subnetwork with an undirected graph as the network topology
-        and a set of directed path as the network flows
-                \item runs a fast simulation algorithm to quickly compute the throughput of every flow
-        in the network model and report congestion if it exists.
+                \item Identifies the minimum subnetwork that is
+                        affected by the incoming flow update
+                \item Models the extracted subnetwork with an 
+                        undirected graph as the network topology
+                        and a set of directed path as the network flows
+                \item Runs a fast simulation algorithm to quickly
+                        compute the throughput of every flow 
+                        in the network model and report congestion
+                        if it exists.
         \end{enumerate}
-        By incrementally updating the model and
-	rejecting the updates that causes congestion, ConVenus can guarantee that at any time the network
-	is congestion-free.  
+        By incrementally updating the model and rejecting the updates
+        that causes congestion, ConVenus can guarantee that at any time
+        the network is congestion-free.  
 
 % Self-healing PMU network
-\item \textbf{SelfHealer} utilizes the feature of direct programmability offered by SDN to
+\item \textbf{SelfHealer} utilizes the feature of direct
+        programmability offered by SDN to
         achieve resilience against cyber attacks in power grid.
-        To firstly prevent further propagation of the attack, SelfHealer directly
-        programs the SDN-enabled network switches so that compromised Phasor Measurement Units
-        and Phasor Data Concentrators are isolated.
-        Meanwhile, the disconnected yet uncompromised PMUs will be automatically
-        reconnect to the network and thus self-heal the observability of the power system.
-        The self-healing process is formulated as integer linear program model to
-        minimize the overhead of the self-healing process,
+        To firstly prevent further propagation of the attack,
+        SelfHealer directly programs the SDN-enabled network switches
+        so that compromised Phasor Measurement Units (PMUs) and 
+        Phasor Data Concentrators (PDCs) are isolated.
+        Meanwhile, the disconnected yet uncompromised PMUs will
+        be automatically reconnect to the network and thus
+        self-heal the observability of the power system.
+        The self-healing process is formulated as integer linear program
+        model to minimize the overhead of the self-healing process,
         while considering the constraints of power system observability,
         hardware resources, and network topology.
 
 % DSSnet and virtual time
-\item \textbf{DSSnet}\cite{DSSnet} address the challenge that it is infeasible to create
-        a physical testbed for modern ICSes given its large scope.
-        We combine a power distribution system simulator with an SDN network emulator
-        so that high performance and temporal fidelity are preserved without sacrificing
-        the supported scalability.
+\item \textbf{DSSnet}\cite{DSSnet} address the challenge that it is
+        infeasible to create a physical testbed for modern ICSes
+        given its large scope. We combine power distribution system
+        simulation with SDN network emulation so that high performance
+        and temporal fidelity are preserved without
+        sacrificing the supported scalability.
         The combination is built on the foundation of a virtual time system:
         on one hand, virtual time system tightly controls (pauses and resumes)
-        the execution of the emulation system whenever synchronization between two
-        sub-systems required;
-        on the other hand, by accurately dilating the clock of emulated network ends,
-        DSSnet is able to emulate high bandwidth and low latency networks that exceeds
+        the execution of the emulation system
+        whenever synchronization between two sub-systems required;
+        on the other hand, by accurately dilating the clock
+        of emulated network ends, DSSnet is able to emulate high bandwidth
+        and low latency networks that exceeds
         resource capability available on the test machines.
 \end{itemize}
 
