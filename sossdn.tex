@@ -78,7 +78,8 @@
 %\crdata{0-12345-67-8/90/01}  % Allows default copyright data (0-89791-88-6/97/05) to be over-ridden - IF NEED BE.
 % --- End of Author Metadata ---
 
-\title{Securing Networked Industrial Control Systems with Software-defined Networking}
+%\title{Securing Networked Industrial Control Systems with Software-defined Networking}
+\title{Towards a Secure and Resilient Industrial Control System with Software-Defined Networking}
 %\subtitle{[Extended Abstract]
 %\titlenote{A full version of this paper is available as
 %\textit{Author's Guide to Preparing ACM SIG Proceedings Using
@@ -109,7 +110,7 @@
 % without further effort on your part as the last section in
 % the body of your article BEFORE References or any Appendices.
 
-\numberofauthors{4} %  in this sample file, there are a *total*
+\numberofauthors{5} %  in this sample file, there are a *total*
 % of EIGHT authors. SIX appear on the 'first-page' (for formatting
 % reasons) and the remaining two appear in the \additionalauthors section.
 %
@@ -146,11 +147,16 @@ Christopher Hannon\\
        \email{xliu125@hawk.iit.edu}
 \and  % use '\and' if you need 'another row' of author names
 % 4th. author
-\alignauthor Dong Jin\\
+\alignauthor Dong (Kevin) Jin\\
        \affaddr{Illinois Institute of Technology}\\
        \affaddr{10 West 31 Street}\\
        \affaddr{Chicago, Illinois}\\
        \email{dong.jin@iit.edu}
+\alignauthor Cheol Won Lee\\
+       \affaddr{National Security Research Institute}\\
+       \affaddr{1559, Yuseong-daero, Yuseong-gu}\\
+       \affaddr{Daejeon, South Korea}\\
+       \email{cheolee@nsr.re.kr}
 % 5th. author
 %\alignauthor Sean Fogarty\\
        %\affaddr{NASA Ames Research Center}\\
@@ -168,9 +174,9 @@ Christopher Hannon\\
 % author on the opening page (as the 'third row') but we ask,
 % for aesthetic reasons that you place these 'additional authors'
 % in the \additional authors block, viz.
-\additionalauthors{Additional authors: John Smith (The Th{\o}rv{\"a}ld Group,
-email: {\texttt{jsmith@affiliation.org}}) and Julius P.~Kumquat
-(The Kumquat Consortium, email: {\texttt{jpkumquat@consortium.net}}).}
+%\additionalauthors{Additional authors: John Smith (The Th{\o}rv{\"a}ld Group,
+%email: {\texttt{jsmith@affiliation.org}}) and Julius P.~Kumquat
+%(The Kumquat Consortium, email: {\texttt{jpkumquat@consortium.net}}).}
 \date{30 July 1999}
 % Just remember to make sure that the TOTAL number of authors
 % is the number that will appear on the first page PLUS the
@@ -180,42 +186,26 @@ email: {\texttt{jsmith@affiliation.org}}) and Julius P.~Kumquat
 \begin{abstract}
 
 % background
-A wide variety of ICSes connected to the physical world rely on
-underlying networks to monitor and control critical physical processes.
-Compromising a communication network in ICSes can cause serious damage to
-the healthy operation of critical national infrastructures such as power,
-water, transportation and so on.
+The research goal of this proposal is to build a more secure, resilient and safe network environment for the industrial control systems (ICSes) that operate many national critical infrastructures.
+Modern ICSes increasingly rely on the computer and communication networks to efficiently monitor and control critical physical processes.
+Compromising those networks can impact the successful operations of the critical infrastructures, including power grids, oil and gas distribution systems, waster water treatment, etc.
+%A wide variety of ICSes connected to the physical world rely on underlying networks to monitor and control critical physical processes.
+%Compromising a communication network in ICSes can cause serious damage to the healthy operation of critical national infrastructures such as power, water, transportation and so on.
 % one sentence summary of 3 works: ConVenus, Self-healing, DSSnet
-In this work, we tackle various challenges to the protection of ICSes by
-applying SDN technologies and developing
-innovative security applications and tools.
-In particular, we install \textit{ConVenus} between
-the control plane and data plane
-to enforce the correct policies defined in the network layer;
-on the data plane layer, we enhance the resilience of PMU networks
-against cyber attacks with \textit{SelfHealer};
-we build a hybrid testing platform \textit{DSSnet} to support
-high-fidelity analysis of cyber attacks on SDN powered ICS networks.
+In this work, we apply the emerging SDN technology to secure ICSes in the context of smart grids, and investigate several innovative SDN-aware security applications.
+SDN paradigm decouples and logically centralizes the control functionality from the data forwarding functionality in an ICS communication network.
+Within the SDN-enabled smart grid, we install \textit{ConVenus} between the control plane and the data plane to enforce the correct network-layer invariants.
+On the data plane layer, we enhance the resilience of PMU networks against cyber attacks with \textit{SelfHealer}.
+We build a hybrid testing platform \textit{DSSnet} to support high-fidelity analysis of cyber-attacks on SDN-enabled ICSes.
 Specifically,
 \begin{itemize}
 % ConVenus
-        \item \textbf{ConVenus}: With SDN-enabled global visibility, ConVenus
-        inherits the real-time verification functionality from
-        Veriflow\cite{Veriflow} and adopts the dynamic data-driven 
-        paradigm to preserve congestion-free property throughout
-        the lifetime of the delay-critical part of the ICSes network.
-	When each time there is a network flow to be inserted,
-        updated or removed, ConVenus performs the following steps:
+        \item \textbf{ConVenus}: With global network visibility offered by SDN, ConVenus inherits the real-time verification functionality from Veriflow\cite{Veriflow} and contains new models and methodology to preserve the congestion-free property in time- and mission- critical ICS networks.
+        ConVenus performs the following actions to verify network congestion for each flow update received from the controller:
         \begin{enumerate}
-                \item Identifies the minimum subnetwork that is
-                        affected by the incoming flow update
-                \item Models the extracted subnetwork with an 
-                        undirected graph as the network topology
-                        and a set of directed path as the network flows
-                \item Runs a fast simulation algorithm to quickly
-                        compute the throughput of every flow 
-                        in the network model and report congestion
-                        if it exists.
+                \item Identify the minimum subnetwork that is affected by the incoming flow update.
+                \item Create a network graph model consisting of the affected flows and ports.
+                \item Compute the throughput of every flow in the network graph model using a four-phase simulation model and verify flow congestion.
         \end{enumerate}
         %By incrementally updating the model and rejecting the updates
         %that causes congestion, ConVenus can guarantee that at anytime
@@ -224,8 +214,8 @@ Specifically,
 % Self-healing PMU network
 \item \textbf{SelfHealer} utilizes the feature of direct
         programmability offered by SDN to
-        achieve resilience against cyber attacks in power grid.
-        Firstly, to prevent further propagation of the attack,
+        achieve resilience against cyber-attacks in the power grid.
+        Firstly, to prevent further propagation of the attacks,
         SelfHealer directly programs the SDN-enabled network switches
         such that compromised Phasor Measurement Units (PMUs) and 
         Phasor Data Concentrators (PDCs) are isolated.
@@ -238,22 +228,12 @@ Specifically,
         hardware resources, and network topology.
 
 % DSSnet and virtual time
-\item \textbf{DSSnet}\cite{DSSnet} provides a platform for evaluating
-        smart grid ICSes motivated by the infeasibility of creating a physical testbed. 
-        We combine electric power distribution system
-        simulation with SDN network emulation to evaluate the security of networks 
-        in ICSes and how SDN can play a role in securing the system.
-        DSSnet efficiently combine simulation with emulation so that high performance
-        and temporal fidelity are preserved without
-        sacrificing scalability.
-        The combination is built on the foundation of a virtual time system:
-        on one hand, virtual time system tightly controls (pauses and resumes)
-        the execution of the emulation system
-        when synchronization between the two sub-systems is required;
-        on the other hand, by accurately dilating the clock
-        of emulated network hosts, DSSnet is able to emulate high bandwidth
-        and low latency networks that exceeds the
-        resource capability available on the test machine.
+\item \textbf{DSSnet}\cite{DSSnet} combines electric power distribution system simulation with SDN network emulation to offer an unique platform for testing and evaluating the SDN-aware applications for ICS resilience and security. 
+        The integration is built on the foundation of a virtual time system.
+        On one hand, the virtual time system tightly controls the execution of the emulation system
+        and provides a basis for correct and efficient synchronization between the simulation and emulation systems.
+        On the other hand, by accurately dilating the clock of the emulated entities,
+        DSSnet is able to significantly improve the fidelity and scalability of the network emulation system.
 \end{itemize}
 
 
