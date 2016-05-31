@@ -1,0 +1,16 @@
+\begin{thebibliography}{1}
+
+\bibitem{DSSnet}
+C.~Hannon, J.~Yan, and D.~Jin.
+\newblock {DSSnet: A Smart Grid Modeling Platform Combining Electrical Power
+  Distribution System Simulation and Software Defined Networking Emulation}.
+\newblock In {\em 2016 ACM SIGSIM Conference on Principle of Advanced Discrete
+  Simulation}, pages 1--11, May 2016.
+
+\bibitem{Veriflow}
+A.~Khurshid, X.~Zou, W.~Zhou, M.~Caesar, and P.~B. Godfrey.
+\newblock Veriflow: Verifying network-wide invariants in real time.
+\newblock In {\em the 10th USENIX Symposium on Networked Systems Design and
+  Implementation}, pages 15--27, Lombard, IL, 2013. USENIX.
+
+\end{thebibliography}
